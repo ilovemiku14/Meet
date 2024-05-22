@@ -1,0 +1,278 @@
+﻿<UserControl x:Class="Meet.Views.ScheduleMeetingUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:prism="http://prismlibrary.com/"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             xmlns:viewmodels="clr-namespace:Meet.ViewModels"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             d:DataContext="{d:DesignInstance Type=viewmodels:ScheduleMeetingUCViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="558" d:DesignWidth="1400">
+
+    <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost" IsOpen="{Binding IsAddMeetOpen}">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- <TextBlock Grid.Row="0" Grid.Column="0" Text="开始时间:" VerticalAlignment="Center" Margin="5" /> -->
+                <!-- <DatePicker Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5" /> -->
+                <!-- <materialDesign:TimePicker Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5" /> -->
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                    <TextBlock Text="开始时间:" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                    <DatePicker SelectedDate="{Binding MeetStartDataTime}" VerticalAlignment="Center" Margin="5" Width="340" />
+                    <materialDesign:TimePicker SelectedTime="{Binding MeetStartTimeSpan}" VerticalAlignment="Center" Margin="5" Width="340" />
+                </StackPanel>
+                <!-- <TextBlock Grid.Row="1" Grid.Column="0" Text="结束时间:" VerticalAlignment="Center" Margin="5" /> -->
+                <!-- <DatePicker Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5" /> -->
+                <!-- <materialDesign:TimePicker Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5" /> -->
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                    <TextBlock Text="结束时间:" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                    <DatePicker SelectedDate="{Binding MeetEndDataTime}" VerticalAlignment="Center" Margin="5" Width="340" />
+                    <materialDesign:TimePicker SelectedTime="{Binding MeetEndTimeSpan}" VerticalAlignment="Center" Margin="5" Width="340" />
+                </StackPanel>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="地点:" VerticalAlignment="Center" Margin="5" />
+                <ComboBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5" SelectedItem="{Binding MeetingRoom, Mode=TwoWay}">
+                    <ComboBoxItem>502A</ComboBoxItem>
+                    <ComboBoxItem>502B TV</ComboBoxItem>
+                    <ComboBoxItem>502C</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="标题:" VerticalAlignment="Center" Margin="5" />
+                <TextBox  Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5" Text="{Binding MeetTitle}" />
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="详细描述:" VerticalAlignment="Center" Margin="5" />
+                <TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5" Text="{Binding MeetMessage}"/>
+
+                <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                    <CheckBox IsChecked="{Binding IsRegularMeet}" x:Name="RegularMeetCheckBox" Content="定期" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                    <ComboBox VerticalAlignment="Center" Margin="5" Width="714"  SelectedItem="{Binding RegularMeetDate, Mode=TwoWay}">
+                        <ComboBoxItem>星期一</ComboBoxItem>
+                        <ComboBoxItem>星期一</ComboBoxItem>
+                        <ComboBoxItem>星期二</ComboBoxItem>
+                        <ComboBoxItem>星期三</ComboBoxItem>
+                        <ComboBoxItem>星期四</ComboBoxItem>
+                        <ComboBoxItem>星期五</ComboBoxItem>
+                        <ComboBoxItem>星期六</ComboBoxItem>
+                        <ComboBoxItem>星期天</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0,415,0" Grid.ColumnSpan="2">
+                    <TextBlock Text="开始:" VerticalAlignment="Center" Margin="0,0,40,0" />
+                    <DatePicker Width="308" SelectedDate="{Binding RegularMeetStartDateTime}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="352,0,5,0">
+                    <TextBlock Text="结束:" VerticalAlignment="Center"  Margin="0,0,40,0"/>
+                    <DatePicker Width="310" SelectedDate="{Binding RegularMeetEndTimeSpan}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                    <Button Content="确定" Command="{Binding MeetAddCommand}" Margin="5" />
+                    <Button Content="取消" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                            CommandParameter="{Binding ElementName=DialogHost}" Margin="5" />
+                </StackPanel>
+            </Grid>
+        </materialDesign:DialogHost.DialogContent>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28*"></RowDefinition>
+                <RowDefinition Height="122*"></RowDefinition>
+                <RowDefinition Height="75*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="310*"></ColumnDefinition>
+                <ColumnDefinition Width="871*"></ColumnDefinition>
+                <ColumnDefinition Width="187*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="预定会议" FontSize="20" Height="34" LineHeight="20" Margin="30,24,0,17" HorizontalAlignment="Left" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Margin="0,69,0,0">
+                <TreeView  MinWidth="220">
+                    <TreeViewItem   Header="武汉" IsExpanded="True">
+                        <TreeViewItem  >
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Selected">
+                                    <prism:InvokeCommandAction Command="{Binding TreeViewItemClickedCommand}"
+                                                           CommandParameter="502A" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                            <TreeViewItem.Header >
+                                <StackPanel Orientation="Horizontal">
+                                    <Viewbox Width="16" Height="16">
+                                        <Canvas Width="24" Height="24">
+                                            <Path Data="M20,10C22,13 17,22 15,22C13,22 13,21 12,21C11,21 11,22 9,22C7,22 2,13 4,10C6,7 9,7 11,8V5C5.38,8.07 4.11,3.78 4.11,3.78C4.11,3.78 6.77,0.19 11,5V3H13V8C15,7 18,7 20,10Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                        </Canvas>
+                                    </Viewbox>
+                                    <TextBlock  Margin="8,0,0,0" Text="502A" />
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem>
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Selected">
+                                    <prism:InvokeCommandAction Command="{Binding TreeViewItemClickedCommand}"
+                                                           CommandParameter="502B TV" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Viewbox Width="16" Height="16">
+                                        <Canvas Width="24" Height="24">
+                                            <Path Data="M20,10C22,13 17,22 15,22C13,22 13,21 12,21C11,21 11,22 9,22C7,22 2,13 4,10C6,7 9,7 11,8V5C5.38,8.07 4.11,3.78 4.11,3.78C4.11,3.78 6.77,0.19 11,5V3H13V8C15,7 18,7 20,10Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                        </Canvas>
+                                    </Viewbox>
+                                    <TextBlock Margin="8,0,0,0" Text="502B TV" />
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem>
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Selected">
+                                    <prism:InvokeCommandAction Command="{Binding TreeViewItemClickedCommand}"
+                                                           CommandParameter="502C" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Viewbox Width="16" Height="16">
+                                        <Canvas Width="24" Height="24">
+                                            <Path Data="M20,10C22,13 17,22 15,22C13,22 13,21 12,21C11,21 11,22 9,22C7,22 2,13 4,10C6,7 9,7 11,8V5C5.38,8.07 4.11,3.78 4.11,3.78C4.11,3.78 6.77,0.19 11,5V3H13V8C15,7 18,7 20,10Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                        </Canvas>
+                                    </Viewbox>
+                                    <TextBlock Margin="8,0,0,0" Text="502C" />
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </TreeViewItem>
+                </TreeView>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1" Width="800px">
+                <TextBlock Text="{Binding RealTimePageData, Mode=TwoWay}" FontSize="30" Height="70" Width="796"/>
+            </StackPanel>
+            <Grid Grid.Row="0" Grid.Column="2">
+                <!-- <ComboBox -->
+                <!--     ItemsSource="{Binding Months}" -->
+                <!--     SelectedItem="{Binding SelectedMonth, Mode=TwoWay}" materialDesign:HintAssist.Hint="选择月份"> -->
+                <!-- </ComboBox> -->
+                <ComboBox
+                    SelectedItem="{Binding SelectedMonth, Mode=TwoWay}"
+                    ItemsSource="{Binding Months}"
+                    SelectionChanged="Selector_OnSelectionChanged"
+                    materialDesign:HintAssist.Hint="选择月份"  
+                    materialDesign:TextFieldAssist.PrefixText="#" IsEditable="False"
+                    Height="23" Width="123" HorizontalAlignment="Left" />
+                <Button
+                Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                Style="{StaticResource MaterialDesignIconButton}"
+                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                ToolTip="MaterialDesignIconButton" Margin="-64,14,207,7">
+                    <materialDesign:PackIcon Kind="VectorPointPlus"/>
+                </Button>
+                <ComboBox
+                    IsEnabled="False"
+                SelectedItem="{Binding SelectedDate, Mode=TwoWay}"
+                ItemsSource="{Binding AddressList}"
+                SelectionChanged="Selector_OnSelectionChanged"
+                materialDesign:HintAssist.Hint="选择展示视图"  materialDesign:TextFieldAssist.PrefixText="#" IsEditable="False" Height="23" Width="123" HorizontalAlignment="Left" Margin="-229,0,0,0"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <materialDesign:Transitioner SelectedIndex="{Binding SelectedIndex,FallbackValue=0}">
+                    <materialDesign:TransitionerSlide>
+                        <ItemsControl ItemsSource="{Binding MeetingsByDay}">
+                            <ItemsControl.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="Width" Value="20"/>
+                                    <Setter Property="Height" Value="20"/>
+                                    <Setter Property="Margin" Value="0,-45,0,0"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="MinWidth" Value="100"></Setter>
+                                    <!-- 鼠标悬停时的背景颜色 -->
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="SkyBlue"/>
+                                        </Trigger>
+                                        <!-- 其他触发器可以在这里添加 -->
+                                    </Style.Triggers>
+                                </Style>
+                            </ItemsControl.Resources>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black" BorderThickness="0.25" Width="150" MinHeight="100">
+                                        <StackPanel>
+                                            <Button
+                                            Content="{Binding Key, StringFormat='Day {0}'}"
+                                            IsEnabled="{Binding Key}"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            ToolTip="日期"
+                                        />
+                                            <ItemsControl ItemsSource="{Binding Value}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button MinWidth="50" Content="{Binding MeetTitle}" 
+                                                                Style="{StaticResource MaterialDesignOutlinedButton}" 
+                                                                ToolTip="{Binding MeetText}" 
+                                                                HorizontalContentAlignment="Stretch" 
+                                                                VerticalContentAlignment="Stretch" 
+                                                                Padding="8,4" 
+                                                                Margin="4"
+                                                                Command="{Binding Path=ShowMeetInfoCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type viewmodels:ScheduleMeetingUCViewModel}}}" 
+                                                                CommandParameter="{Binding}"/>                                           
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </materialDesign:TransitionerSlide>
+                    <materialDesign:TransitionerSlide>
+                        <TextBlock Text="日"></TextBlock>
+                    </materialDesign:TransitionerSlide>
+                </materialDesign:Transitioner>
+
+            </Grid>
+
+        </Grid>
+        <!-- <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Width="160" Content="打开" Margin="0,64,0,0"/> -->
+    </materialDesign:DialogHost>
+</UserControl>

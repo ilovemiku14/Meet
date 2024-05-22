@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Meet</id>
+    <version>1.0.0</version>
+    <authors>Meet</authors>
+    <description>Package Description</description>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0">
+        <dependency id="LBT.RestSharp" version="106.11.7.1" exclude="Build,Analyzers" />
+        <dependency id="LiveCharts.Wpf" version="0.9.7" exclude="Build,Analyzers" />
+        <dependency id="MaterialDesignColors" version="3.1.0-ci609" exclude="Build,Analyzers" />
+        <dependency id="MaterialDesignThemes" version="5.0.1-ci587" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.3" exclude="Build,Analyzers" />
+        <dependency id="Prism.DryIoc" version="8.1.97" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Users\28244\source\repos\Meet\bin\Debug\net8.0-windows\Meet.runtimeconfig.json" target="lib\net8.0-windows7.0\Meet.runtimeconfig.json" />
+    <file src="C:\Users\28244\source\repos\Meet\bin\Debug\net8.0-windows\Meet.dll" target="lib\net8.0-windows7.0\Meet.dll" />
+  </files>
+</package>

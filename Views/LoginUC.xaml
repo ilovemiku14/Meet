@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="Meet.Views.LoginUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:pwdEx="clr-namespace:Meet.Extensions"
+             xmlns:viewmodels="clr-namespace:Meet.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:LoginUCViewModel}"
+             d:DesignHeight="675" d:DesignWidth="1400">
+    <Grid>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Grid.Row="0" BorderThickness="1" CornerRadius="10" Background="#424242"
+                    materialDesign:ElevationAssist.Elevation="Dp6">
+                <TextBlock Text="DDC Meeting Room Booking System" TextAlignment="Left" Padding="20,15,0,0"
+                           FontSize="15" />
+            </Border>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="450" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="325" />
+                    <ColumnDefinition Width="750" />
+                    <ColumnDefinition Width="325" />
+                </Grid.ColumnDefinitions>
+                <materialDesign:Snackbar Grid.Column="2" x:Name="SnackbarOne" IsActive="False" Message="hello 1"
+                                         Margin="37,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"
+                                         Grid.RowSpan="2" />
+                <materialDesign:Transitioner Grid.Row="1" Grid.Column="1"
+                                             SelectedIndex="{Binding SelectedIndex,FallbackValue=0}">
+                    <materialDesign:TransitionerSlide>
+                        <GroupBox Margin="16"
+                                  materialDesign:ElevationAssist.Elevation="Dp6"
+                                  Header="登录到DDC会议室预订系统"
+                                  Style="{StaticResource MaterialDesignCardGroupBox}">
+                            <Border>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="41*" />
+                                        <RowDefinition Height="72*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock TextAlignment="Left" Padding="30,25,0,0" FontSize="10" Grid.Column="0"
+                                               Text="DXC邮箱" Margin="0,13,0,17" Grid.RowSpan="2" />
+                                    <TextBox x:Name="LoginGmail" TextAlignment="Left" Text="{Binding LoginGmail}"
+                                             Padding="10,20,0,0" FontSize="10"
+                                             Grid.Row="1" Grid.Column="0" Margin="0,21,10,29"
+                                             HorizontalAlignment="Right" Width="661" Grid.RowSpan="2" />
+                                    <TextBlock TextAlignment="Left" Padding="30,25,0,0" FontSize="10" Grid.Row="2"
+                                               Grid.Column="0" Text="密码" Margin="3,35,-3,21" Grid.RowSpan="2" />
+                                    <PasswordBox pwdEx:PasswordBoxAttachedProperties.Attach="True"
+                                                 pwdEx:PasswordBoxAttachedProperties.Password="{Binding Pwd, Mode=TwoWay}"
+                                                 x:Name="PassWord" Padding="10,20,0,0" FontSize="10" Grid.Row="3"
+                                                 Grid.Column="0" Password="" Margin="29,34,23,23" Grid.RowSpan="2" />
+                                    <TextBlock TextAlignment="Left" Padding="30,25,0,0" FontSize="10" Grid.Row="4"
+                                               Grid.Column="0" Text="会议室地址" Margin="0,28,0,27" Grid.RowSpan="2" />
+                                    <ComboBox x:Name="MeetAddressList" Grid.Row="5" Grid.Column="0" IsEditable="False"
+                                              Margin="29,29,328,0"
+                                              SelectedItem="{Binding SelectedAddress, Mode=TwoWay}"
+                                              ItemsSource="{Binding AddressList}"
+                                              Grid.RowSpan="2" VerticalAlignment="Top" />
+                                    <Grid Grid.Row="7">
+                                        <Button Width="100" Margin="395,10,205,4" IsDefault="False"
+                                                Command="{Binding LoginCmm}">
+                                            登陆
+                                        </Button>
+                                        <Button Width="100" Margin="500,10,100,4" IsDefault="False"
+                                                Command="{Binding ShowRegInfoCmm}">
+                                            注册新用户
+                                        </Button>
+                                        <Button Width="100" Margin="605,10,-5,4">忘记密码</Button>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                        </GroupBox>
+                    </materialDesign:TransitionerSlide>
+                    <materialDesign:TransitionerSlide>
+                        <GroupBox Margin="16"
+                                  materialDesign:ElevationAssist.Elevation="Dp6"
+                                  Header="DXC会议账号注册中心"
+                                  Style="{StaticResource MaterialDesignCardGroupBox}">
+                            <Border>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="41*" />
+                                        <RowDefinition Height="72*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                        <RowDefinition Height="56*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock TextAlignment="Left" Padding="30,25,0,0" FontSize="10" Grid.Column="0"
+                                               Text="用户名" Margin="-10,-21,10,0" Height="39" VerticalAlignment="Top" />
+                                    <TextBox x:Name="RegLoginName" TextAlignment="Left" Padding="10,20,0,0"
+                                             FontSize="10" Text="{Binding AccountInfo.Name}" Margin="0,18,0,2"
+                                             HorizontalAlignment="Center" Width="668" Grid.RowSpan="2" />
+                                    <TextBlock TextAlignment="Left" FontSize="10" Grid.Column="0"
+                                               Text="DXC邮箱" Margin="20,14,-20,35" Grid.Row="2" Grid.RowSpan="2" />
+                                    <TextBox x:Name="RegLoginGmail" TextAlignment="Left" Padding="10,20,0,0"
+                                             FontSize="10" Grid.Row="2" Text="{Binding AccountInfo.DxcGmail}"
+                                             Margin="0,32,0,10"
+                                             HorizontalAlignment="Center" Width="668" Grid.RowSpan="2" />
+                                    <TextBlock TextAlignment="Left" FontSize="10" Grid.Row="4"
+                                               Grid.Column="0" Text="密码" Margin="20,4,-20,26" Grid.RowSpan="2" />
+                                    <PasswordBox pwdEx:PasswordBoxAttachedProperties.Attach="True"
+                                                 pwdEx:PasswordBoxAttachedProperties.Password="{Binding AccountInfo.Password, Mode=TwoWay}"
+                                                 x:Name="RegPassWord" FontSize="10" Grid.Row="4"
+                                                 Grid.Column="0" Password="" Margin="20,18,24,18" Grid.RowSpan="2" />
+                                    <TextBlock TextAlignment="Left" FontSize="10" Grid.Row="6"
+                                               Grid.Column="0" Text="确认密码" Margin="20,1,-20,10" />
+                                    <PasswordBox pwdEx:PasswordBoxAttachedProperties.Attach="True"
+                                                 pwdEx:PasswordBoxAttachedProperties.Password="{Binding AccountInfo.RegPassword, Mode=TwoWay}"
+                                                 x:Name="RegReSetPassWord" FontSize="10"
+                                                 Grid.Row="6" Grid.Column="0" Password="" Margin="15,27,28,9"
+                                                 Grid.RowSpan="2" />
+                                    <Grid Grid.Row="7" Margin="3,28,0,10" Grid.RowSpan="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="81*" />
+                                            <ColumnDefinition Width="510*" />
+                                            <ColumnDefinition Width="106*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Button Width="100" Margin="378,0,32,-37" IsDefault="False" Grid.Column="1"
+                                                Height="32" VerticalAlignment="Bottom" Command="{Binding ReqCmm}">
+                                            注册新用户
+                                        </Button>
+                                        <Button Width="100" Margin="499,40,17,-37" IsDefault="False"
+                                                Command="{Binding BackRegInfoCmm}" Grid.Column="1" Grid.ColumnSpan="2">
+                                            取消
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                        </GroupBox>
+                    </materialDesign:TransitionerSlide>
+                </materialDesign:Transitioner>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

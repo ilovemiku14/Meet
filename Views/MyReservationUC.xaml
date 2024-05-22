@@ -1,0 +1,191 @@
+﻿<UserControl x:Class="Meet.Views.MyReservationUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             mc:Ignorable="d"
+             xmlns:viewmodels="clr-namespace:Meet.ViewModels"
+             xmlns:models="clr-namespace:Meet.Models"
+             d:DataContext="{d:DesignInstance Type=viewmodels:MyReservationUCViewModel}"
+             d:DesignHeight="558" d:DesignWidth="1400">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock FontSize="20" Grid.Column="0" Text="我的预订" VerticalAlignment="Center" Margin="10,0"/>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
+                    <TextBox Text="{Binding CueryConditions}" x:Name="SearchBox" Width="200" VerticalContentAlignment="Center"/>
+                    <Button Command="{Binding QueriedMeetCollectionCmm}" Content="搜索" Margin="5,0,0,0" Padding="10,5"/>
+                    <Button Command="{Binding ClearQueriedMeetCollectionCmm}" Content="清理搜索结果" Margin="5,0,0,0" Padding="10,5"/>
+                </StackPanel>
+            </Grid>
+
+            <DataGrid Grid.Row="1" AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      HeadersVisibility="All"
+                      ItemsSource="{Binding MeetList}"
+                      SelectionUnit="{Binding ElementName=selectionUnitComboBox, Path=SelectedValue}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="会议Id">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBlock FontSize="14"
+                                           FontStyle="Italic"
+                                           Text="{Binding MeetSortId}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBox IsReadOnly= "True" Foreground="{DynamicResource SecondaryHueMidBrush}" Text="{Binding MeetId}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="登陆时间">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBlock FontSize="14"
+                                           FontStyle="Italic"
+                                           Text="{Binding MeetCreateTime}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBox Foreground="{DynamicResource SecondaryHueMidBrush}" Text="{Binding MeetCreateTime}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="会议室">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBlock FontSize="14"
+                                           FontStyle="Italic"
+                                           Text="{Binding MeetingRoom}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBox Foreground="{DynamicResource SecondaryHueMidBrush}" Text="{Binding MeetingRoom}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="预定开始时间">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBlock FontSize="14"
+                                           FontStyle="Italic"
+                                           Text="{Binding MeetStartTime}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBox Foreground="{DynamicResource SecondaryHueMidBrush}" Text="{Binding MeetStartTime}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="预定结束时间">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBlock FontSize="14"
+                                           FontStyle="Italic"
+                                           Text="{Binding MeetEndTime}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBox Foreground="{DynamicResource SecondaryHueMidBrush}" Text="{Binding MeetEndTime}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="定期">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBlock FontSize="14"
+                                           FontStyle="Italic"
+                                           Text="{Binding Regular}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBox Foreground="{DynamicResource SecondaryHueMidBrush}" Text="{Binding Regular}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="标题">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBlock FontSize="14"
+                                           FontStyle="Italic"
+                                           Text="{Binding MeetTitle}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBox Foreground="{DynamicResource SecondaryHueMidBrush}" Text="{Binding MeetTitle}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="详细">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBlock FontSize="14"
+                                           FontStyle="Italic"
+                                           Text="{Binding MeetMessage}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type models:Meet}">
+                                <TextBox Foreground="{DynamicResource SecondaryHueMidBrush}" Text="{Binding MeetMessage}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="操作">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding DataContext.DeleteMeetCmm, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding}"
+                                        Content="删除"
+                                        Margin="5,0,0,0"
+                                        Padding="10,5" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock FontSize="20" Grid.Column="0" Text="提交更新" VerticalAlignment="Center" Margin="10,0"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
+                    <Button Command="{Binding UpdateMeetCmm}" Content="提交更新" Margin="5,0,0,0" Padding="10,5"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <!-- <TextBlock Text="我的预约" FontSize="30" /> -->
+       
+            <!-- <DataGrid CanUserAddRows="False" -->
+            <!--           ItemsSource="{Binding MeetList}" -->
+            <!--           SelectionMode="Extended" -->
+            <!--           SelectionUnit="Cell" /> -->
+    </Grid>
+</UserControl>

@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Views\ScheduleMeeting.xaml.cs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Images\300.png"/>
+        <None Remove="Images\铸币10.gif.jpg"/>
+        <None Remove="Image\铸币10.gif.jpg"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Page Remove="Views\ScheduleMeeting.xaml"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="LBT.RestSharp" Version="106.11.7.1"/>
+        <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+        <PackageReference Include="MaterialDesignColors" Version="3.1.0-ci609" />
+        <PackageReference Include="MaterialDesignThemes" Version="5.0.1-ci587"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Prism.DryIoc" Version="8.1.97"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Resource Include="Images\300.png"/>
+        <Resource Include="Images\铸币10.gif.jpg"/>
+        <None Remove="Icon\ICO.jpg" />
+        <Resource Include="Icon\ICO.jpg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+    </ItemGroup>
+
+</Project>
